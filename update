@@ -124,12 +124,6 @@
 <div class="form-field">
   <label>Pick your flowers <span class="optional-badge">Optional</span></label>
   <div class="flower-grid">
-    <button type="button" class="flower-option" data-flower="🌹" title="Rose">🌹</button>
-    <button type="button" class="flower-option" data-flower="🌺" title="Hibiscus">🌺</button>
-    <button type="button" class="flower-option" data-flower="🌸" title="Cherry Blossom">🌸</button>
-    <button type="button" class="flower-option" data-flower="🌼" title="Sunflower">🌼</button>
-    <button type="button" class="flower-option" data-flower="🌻" title="Daisy">🌻</button>
-    <button type="button" class="flower-option" data-flower="💐" title="Bouquet">💐</button>
   </div>
 </div>
 
