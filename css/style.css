@@ -1,0 +1,422 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f5f0 0%, #fffbf7 100%);
+    color: #5a4a42;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* ===== FORM SECTION ===== */
+.form-section {
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-header h1 {
+    font-size: 28px;
+    color: #8b6f47;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: #a89a8a;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #6b5b52;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e8dcc8;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #5a4a42;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #d4a574;
+    background-color: #fffbf7;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.char-count {
+    font-size: 12px;
+    color: #a89a8a;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.file-hint {
+    font-size: 12px;
+    color: #a89a8a;
+    margin-top: 5px;
+}
+
+/* ===== FLOWER GRID ===== */
+.flower-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.flower-btn {
+    padding: 12px;
+    border: 2px solid #e8dcc8;
+    background: white;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.flower-btn:hover {
+    border-color: #d4a574;
+    background-color: #fff9f3;
+    transform: scale(1.1);
+}
+
+.flower-btn.active {
+    border-color: #d4a574;
+    background-color: #f5e6d3;
+    box-shadow: 0 2px 8px rgba(212, 165, 116, 0.3);
+}
+
+/* ===== SEND BUTTON ===== */
+.send-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #d4a574 0%, #c89456 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+}
+
+.send-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== PREVIEW SECTION ===== */
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 30px;
+}
+
+.envelope-container {
+    perspective: 1000px;
+    width: 100%;
+}
+
+.envelope {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== ENVELOPE FRONT ===== */
+.envelope-front {
+    background: linear-gradient(135deg, #fefdfb 0%, #fffbf7 100%);
+    border-bottom: 3px dashed #d4a574;
+    padding: 20px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.envelope-stamp {
+    align-self: flex-end;
+    font-size: 36px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.envelope-address {
+    font-size: 12px;
+    color: #5a4a42;
+    line-height: 1.6;
+}
+
+.address-to, .address-from {
+    font-weight: 500;
+}
+
+/* ===== LETTER (NỘI DUNG INSIDE) ===== */
+.letter {
+    background: #fffbf7;
+    padding: 30px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 3px dashed #d4a574;
+}
+
+.letter-top {
+    text-align: center;
+    font-size: 48px;
+}
+
+.letter-flower {
+    display: inline-block;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.letter-content {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #5a4a42;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: justify;
+}
+
+/* ===== FONT STYLES ===== */
+.letter-content.dancing {
+    font-family: 'Dancing Script', cursive;
+    font-size: 18px;
+}
+
+.letter-content.satisfy {
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.letter-content.greatvibes {
+    font-family: 'Great Vibes', cursive;
+    font-size: 22px;
+}
+
+.letter-content.caveat {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.letter-content.playwritevn {
+    font-family: 'Playwrite VN', cursive;
+    font-size: 18px;
+}
+
+.letter-content.georgia {
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+
+.letter-content.cursive {
+    font-family: cursive;
+    font-size: 19px;
+    font-style: italic;
+}
+
+.letter-signature {
+    text-align: right;
+    font-size: 14px;
+    color: #8b6f47;
+    margin-top: 10px;
+}
+
+.letter-signature p {
+    margin: 2px 0;
+}
+
+.letter-image-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.letter-image-container img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 5px;
+    border: 2px solid #d4a574;
+}
+
+/* ===== SUCCESS MESSAGE ===== */
+.success-message {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    border: 2px solid #c3e6cb;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .preview-section {
+        position: static;
+        width: 100%;
+    }
+
+    .form-section {
+        max-height: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-header h1 {
+        font-size: 24px;
+    }
+
+    .flower-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .letter {
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .letter-content {
+        font-size: 14px;
+    }
+
+    .envelope-stamp {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form-section,
+    .letter {
+        padding: 15px;
+    }
+
+    .form-header h1 {
+        font-size: 20px;
+    }
+
+    .flower-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .flower-btn {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    .letter-flower {
+        font-size: 36px;
+    }
+
+    .letter-content {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+}

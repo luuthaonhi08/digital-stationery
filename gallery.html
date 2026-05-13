@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hòm Thư Bí Mật - Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playwrite+VN&family=Satisfy&family=Great+Vibes&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body class="gallery-page">
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>💌 Hòm Thư Bí Mật</h1>
+            <p>Tất cả những lá thư đã nhận</p>
+        </div>
+
+        <div id="letterGallery" class="letter-gallery">
+            <!-- Letters sẽ được load động từ Google Sheets -->
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display:none;">
+            <p>📭 Chưa có thư nào trong hòm. Hãy quay lại trang chính để gửi thư!</p>
+        </div>
+    </div>
+
+    <!-- Modal để xem chi tiết thư -->
+    <div id="letterModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <div class="modal-letter">
+                    <div class="modal-letter-header">
+                        <p class="modal-to">Gửi đến: <strong id="modalTo"></strong></p>
+                        <p class="modal-from">Từ: <strong id="modalFrom"></strong></p>
+                        <p class="modal-date" id="modalDate"></p>
+                    </div>
+                    <div class="modal-letter-content" id="modalMessage"></div>
+                    <div id="modalImageContainer" style="display:none;">
+                        <img id="modalImage" src="" alt="Ảnh đính kèm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+.gallery-page {
+    background: linear-gradient(135deg, #f5f5f0 0%, #fffbf7 100%);
+    min-height: 100vh;
+}
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.gallery-header h1 {
+    font-size: 42px;
+    color: #8b6f47;
+    margin-bottom: 10px;
+}
+
+.gallery-header p {
+    color: #a89a8a;
+    font-size: 16px;
+}
+
+/* ===== LETTER GALLERY GRID ===== */
+.letter-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.letter-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.letter-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.letter-card-header {
+    background: linear-gradient(135deg, #d4a574 0%, #c89456 100%);
+    padding: 15px;
+    color: white;
+}
+
+.letter-card-to {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.letter-card-from {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.letter-card-body {
+    padding: 20px;
+}
+
+.letter-card-flower {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.letter-card-preview {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5a4a42;
+    max-height: 100px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    margin-bottom: 12px;
+}
+
+.letter-card-date {
+    font-size: 12px;
+    color: #a89a8a;
+    border-top: 1px solid #e8dcc8;
+    padding-top: 12px;
+}
+
+.letter-card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top: 1px solid #e8dcc8;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #a89a8a;
+    font-size: 18px;
+}
+
+/* ===== MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #a89a8a;
+    z-index: 1001;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #d4a574;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-letter {
+    background: #fffbf7;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #d4a574;
+}
+
+.modal-letter-header {
+    border-bottom: 2px dashed #d4a574;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #5a4a42;
+}
+
+.modal-to, .modal-from, .modal-date {
+    margin: 5px 0;
+}
+
+.modal-letter-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #5a4a42;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+#modalImageContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 2px solid #d4a574;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .gallery-container {
+        padding: 20px;
+    }
+
+    .gallery-header h1 {
+        font-size: 32px;
+    }
+
+    .letter-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-header h1 {
+        font-size: 24px;
+    }
+
+    .letter-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+}
