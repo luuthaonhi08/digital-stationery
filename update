@@ -124,12 +124,6 @@
 <div class="form-field">
   <label>Pick your flowers <span class="optional-badge">Optional</span></label>
   <div class="flower-grid">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/233e2136f1cb0d91b0ace9deafea0ed0417cf7e0.png">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/f8a19048602434e4a81f8b3f2efd284349130d3c.png">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/053da0042a87d1643e1b1f3ba7d7337ec10eebed.png">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/63413a51be7f8ecc80ada383aa6b74b7f0d7fb31.png">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/82e4a498284b6f5fabd4534c902441362e1cdc50.png">
-    <button type="button" class="flower-option" data-flower="https://www.gardenletters.online/_assets/v11/6d8f86ecc6e1fe9b76647207546481c4fb38e0fc.png">
   </div>
 </div>
 
