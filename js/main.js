@@ -1,130 +1,126 @@
 // ===== GOOGLE APPS SCRIPT URL =====
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/useTrigger';
 
-// ===== GLOBAL VARIABLES =====
+// ===== DOM ELEMENTS =====
 const toField = document.getElementById('toField');
 const fromField = document.getElementById('fromField');
 const messageField = document.getElementById('messageField');
-const fontSelect = document.getElementById('fontSelect');
-const flowerButtons = document.querySelectorAll('.flower-btn');
-const imageUpload = document.getElementById('imageUpload');
-const letterForm = document.getElementById('letterForm');
-const charCount = document.getElementById('charCount');
+const sendBtn = document.getElementById('sendBtn');
+const flowerOptions = document.querySelectorAll('.flower-option');
+const handwritingOptions = document.querySelectorAll('.handwriting-option');
+const successMessage = document.getElementById('successMessage');
 
 const previewTo = document.getElementById('previewTo');
 const previewFrom = document.getElementById('previewFrom');
 const previewMessage = document.getElementById('previewMessage');
 const previewFlower = document.getElementById('previewFlower');
-const previewImage = document.getElementById('previewImage');
-const previewSigner = document.getElementById('previewSigner');
-const previewSignerName = document.getElementById('previewSignerName');
-const successMessage = document.getElementById('successMessage');
 
 let selectedFlower = '🌸';
-let uploadedImageBase64 = '';
+let selectedFont = 'normal';
 
-// ===== LIVE PREVIEW UPDATES =====
-
-// Real-time update "To" field
+// ===== UPDATE CHARACTER COUNTERS =====
 toField.addEventListener('input', (e) => {
-    previewTo.textContent = e.target.value || 'Người nhận';
+    const next = e.target.nextElementSibling;
+    next.textContent = `${e.target.value.length}/25`;
+    previewTo.textContent = e.target.value || 'You';
 });
 
-// Real-time update "From" field
 fromField.addEventListener('input', (e) => {
-    previewFrom.textContent = e.target.value || 'Người gửi';
-    previewSignerName.textContent = e.target.value ? `❤️` : '❤️';
+    const next = e.target.nextElementSibling;
+    next.textContent = `${e.target.value.length}/25`;
+    previewFrom.textContent = e.target.value || 'Someone who cares';
 });
 
-// Real-time update Message with character count
 messageField.addEventListener('input', (e) => {
-    const text = e.target.value;
-    previewMessage.textContent = text || 'Nội dung thư của bạn sẽ xuất hiện tại đây...';
-    charCount.textContent = text.length;
+    const next = e.target.nextElementSibling;
+    next.textContent = `${e.target.value.length}/140`;
+    
+    // Update preview with current font
+    previewMessage.textContent = e.target.value || 'Your message will appear here as you type...';
+    previewMessage.className = `letter-content ${selectedFont}`;
 });
 
-// Font selection update
-fontSelect.addEventListener('change', (e) => {
-    const fontClass = e.target.value;
-    previewMessage.className = `letter-content ${fontClass}`;
-});
-
-// Flower selection
-flowerButtons.forEach(btn => {
+// ===== FLOWER SELECTION =====
+flowerOptions.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Remove active class from all buttons
-        flowerButtons.forEach(b => b.classList.remove('active'));
+        // Remove active class from all
+        flowerOptions.forEach(b => b.classList.remove('active'));
         
-        // Add active class to clicked button
+        // Add active class to clicked
         btn.classList.add('active');
         
-        // Update selected flower
+        // Update flower
         selectedFlower = btn.dataset.flower;
         previewFlower.textContent = selectedFlower;
     });
 });
 
-// Image upload with preview
-imageUpload.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-        // Check file size (max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-            alert('⚠️ File quá lớn! Vui lòng chọn ảnh dưới 5MB');
-            imageUpload.value = '';
-            previewImage.style.display = 'none';
-            uploadedImageBase64 = '';
-            return;
-        }
+// Set first flower as active by default
+if (flowerOptions.length > 0) {
+    flowerOptions[0].classList.add('active');
+}
+
+// ===== HANDWRITING SELECTION =====
+handwritingOptions.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
         
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            uploadedImageBase64 = event.target.result;
-            previewImage.src = uploadedImageBase64;
-            previewImage.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    } else {
-        previewImage.style.display = 'none';
-        previewImage.src = '';
-        uploadedImageBase64 = '';
-        if (file) {
-            alert('⚠️ Vui lòng chọn một file hình ảnh hợp lệ (JPG, PNG, GIF)!');
+        // Remove active class from all
+        handwritingOptions.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked
+        btn.classList.add('active');
+        
+        // Update font
+        selectedFont = btn.dataset.font;
+        
+        // Update preview message font
+        if (messageField.value) {
+            previewMessage.className = `letter-content ${selectedFont}`;
         }
-    }
+    });
 });
 
-// ===== FORM SUBMISSION =====
-letterForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+// Set first handwriting as active by default
+if (handwritingOptions.length > 0) {
+    handwritingOptions[0].classList.add('active');
+}
 
+// ===== FORM SUBMISSION =====
+sendBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    
     // Validate required fields
-    if (!toField.value.trim() || !fromField.value.trim() || !messageField.value.trim()) {
-        alert('❌ Vui lòng điền đầy đủ thông tin: Gửi đến, Từ, và Nội dung thư');
+    if (!toField.value.trim() || !messageField.value.trim()) {
+        alert('⚠️ Please fill in "To" and "Your message" fields');
         return;
     }
-
-    // Disable send button during submission
-    const sendBtn = document.querySelector('.send-btn');
+    
+    // Disable send button
     const originalText = sendBtn.textContent;
     sendBtn.disabled = true;
-    sendBtn.textContent = '⏳ Đang gửi...';
-
-    // Prepare data for Google Sheets
+    sendBtn.textContent = 'Sending...';
+    
+    // Prepare data
     const letterData = {
         to: toField.value.trim(),
-        from: fromField.value.trim(),
+        from: fromField.value.trim() || 'Anonymous',
         message: messageField.value.trim(),
         flower: selectedFlower,
-        font: fontSelect.value,
-        timestamp: new Date().toLocaleString('vi-VN'),
-        image: uploadedImageBase64 // Base64 image data
+        font: selectedFont,
+        timestamp: new Date().toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })
     };
-
+    
     try {
-        // Send data to Google Apps Script
+        // Send to Google Apps Script
         const response = await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
@@ -133,46 +129,57 @@ letterForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify(letterData)
         });
-
-        // Show success message
+        
+        // Show success
         successMessage.style.display = 'block';
-        successMessage.textContent = '✅ Thư của bạn đã được gửi vào hòm thư bí mật!';
-
+        
         // Reset form
         setTimeout(() => {
-            letterForm.reset();
-            previewTo.textContent = 'Người nhận';
-            previewFrom.textContent = 'Người gửi';
-            previewMessage.textContent = 'Nội dung thư của bạn sẽ xuất hiện tại đây...';
+            toField.value = '';
+            fromField.value = '';
+            messageField.value = '';
+            toField.nextElementSibling.textContent = '0/25';
+            fromField.nextElementSibling.textContent = '0/25';
+            messageField.nextElementSibling.textContent = '0/140';
+            
+            previewTo.textContent = 'You';
+            previewFrom.textContent = 'Someone who cares';
+            previewMessage.textContent = 'Your message will appear here as you type...';
             previewFlower.textContent = '🌸';
-            previewImage.style.display = 'none';
-            previewMessage.className = 'letter-content default';
-            fontSelect.value = 'default';
+            
             selectedFlower = '🌸';
-            uploadedImageBase64 = '';
-            flowerButtons.forEach(btn => btn.classList.remove('active'));
-            charCount.textContent = '0';
+            selectedFont = 'normal';
+            
+            flowerOptions.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === 0);
+            });
+            
+            handwritingOptions.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === 0);
+            });
+            
+            previewMessage.className = 'letter-content normal';
+            
             sendBtn.disabled = false;
             sendBtn.textContent = originalText;
-
-            // Hide success message after 3 seconds
+            
+            // Hide success after 3 seconds
             setTimeout(() => {
                 successMessage.style.display = 'none';
             }, 3000);
         }, 500);
-
+        
     } catch (error) {
-        console.error('Lỗi khi gửi thư:', error);
+        console.error('Error:', error);
         sendBtn.disabled = false;
         sendBtn.textContent = originalText;
-        alert('❌ Có lỗi xảy ra. Vui lòng thử lại!\nChắc chắn bạn đã cập nhật DEPLOYMENT_ID chưa?');
+        alert('❌ Something went wrong. Please make sure you updated the DEPLOYMENT_ID correctly.');
     }
 });
 
 // ===== KEYBOARD SHORTCUTS =====
 document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + Enter để gửi thư
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        letterForm.dispatchEvent(new Event('submit'));
+        sendBtn.click();
     }
 });

@@ -11,114 +11,113 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="writing-container">
         <!-- Cột trái: Form nhập liệu -->
         <div class="form-section">
-            <div class="form-header">
-                <h1>✉️ Gửi Thư Của Bạn</h1>
-                <p>Viết một lá thư đặc biệt cho người yêu thương</p>
+            <!-- TO: Field -->
+            <div class="form-group">
+                <label class="label-text">To:</label>
+                <input type="text" class="input-field" id="toField" placeholder="Who is this note for?" maxlength="25">
+                <div class="char-counter">0/25</div>
             </div>
 
-            <form id="letterForm">
-                <!-- TO -->
-                <div class="form-group">
-                    <label for="toField">👤 Gửi đến:</label>
-                    <input type="text" id="toField" placeholder="Tên người nhận" maxlength="50">
-                </div>
+            <!-- FROM: Field (Optional) -->
+            <div class="form-group">
+                <label class="label-text">From: <span class="optional-tag">Optional</span></label>
+                <input type="text" class="input-field" id="fromField" placeholder="(Leave blank to post anonymously)" maxlength="25">
+                <div class="char-counter">0/25</div>
+            </div>
 
-                <!-- FROM -->
-                <div class="form-group">
-                    <label for="fromField">💌 Từ:</label>
-                    <input type="text" id="fromField" placeholder="Tên của bạn" maxlength="50">
-                </div>
+            <!-- YOUR MESSAGE -->
+            <div class="form-group">
+                <label class="label-text">Your message</label>
+                <textarea class="textarea-field" id="messageField" placeholder="What do you want to say?" maxlength="140"></textarea>
+                <div class="char-counter">0/140</div>
+            </div>
 
-                <!-- MESSAGE -->
-                <div class="form-group">
-                    <label for="messageField">📝 Nội dung thư:</label>
-                    <textarea id="messageField" placeholder="Viết tin nhắn của bạn tại đây..." maxlength="1000" rows="8"></textarea>
-                    <span class="char-count"><span id="charCount">0</span>/1000</span>
+            <!-- PICK YOUR FLOWERS -->
+            <div class="form-group">
+                <label class="label-text">Pick your flowers <span class="optional-tag">Optional</span></label>
+                <div class="flower-picker">
+                    <button type="button" class="flower-option" data-flower="🌼" title="Yellow Flower">🌼</button>
+                    <button type="button" class="flower-option" data-flower="🌼" title="Yellow Flower 2">🌼</button>
+                    <button type="button" class="flower-option" data-flower="🌹" title="Red Flower">🌹</button>
+                    <button type="button" class="flower-option" data-flower="🌺" title="Orange Flower">🌺</button>
+                    <button type="button" class="flower-option" data-flower="💙" title="Blue Flower">💙</button>
+                    <button type="button" class="flower-option" data-flower="🌸" title="Pink Flower">🌸</button>
+                    <button type="button" class="flower-option" data-flower="🌷" title="Tulip">🌷</button>
                 </div>
+            </div>
 
-                <!-- PICK FLOWERS -->
-                <div class="form-group">
-                    <label for="flowerSelect">🌸 Chọn loài hoa yêu thích:</label>
-                    <div class="flower-grid">
-                        <button type="button" class="flower-btn" data-flower="🌹" title="Hoa hồng">🌹</button>
-                        <button type="button" class="flower-btn" data-flower="🌺" title="Hoa phong cách">🌺</button>
-                        <button type="button" class="flower-btn" data-flower="🌸" title="Hoa anh đào">🌸</button>
-                        <button type="button" class="flower-btn" data-flower="🌼" title="Hoa hướng dương">🌼</button>
-                        <button type="button" class="flower-btn" data-flower="🌻" title="Hoa cúc">🌻</button>
-                        <button type="button" class="flower-btn" data-flower="💐" title="Bó hoa">💐</button>
-                        <button type="button" class="flower-btn" data-flower="🌷" title="Hoa tulip">🌷</button>
-                        <button type="button" class="flower-btn" data-flower="🥀" title="Hoa hồng héo">🥀</button>
-                    </div>
+            <!-- SELECT YOUR HANDWRITING -->
+            <div class="form-group">
+                <label class="label-text">Select your handwriting</label>
+                <input type="hidden" id="currentFont" value="normal">
+                <div class="handwriting-samples">
+                    <button type="button" class="handwriting-option" data-font="normal">
+                        <span class="sample normal">A quick brown fox jumps over the lazy dog</span>
+                    </button>
+                    <button type="button" class="handwriting-option" data-font="dancing">
+                        <span class="sample dancing">A quick brown fox jumps over the lazy dog</span>
+                    </button>
+                    <button type="button" class="handwriting-option" data-font="satisfy">
+                        <span class="sample satisfy">A quick brown fox jumps over the lazy dog</span>
+                    </button>
+                    <button type="button" class="handwriting-option" data-font="greatvibes">
+                        <span class="sample greatvibes">A quick brown fox jumps over the lazy dog</span>
+                    </button>
+                    <button type="button" class="handwriting-option" data-font="caveat">
+                        <span class="sample caveat">A quick brown fox jumps over the lazy dog</span>
+                    </button>
+                    <button type="button" class="handwriting-option" data-font="playwritevn">
+                        <span class="sample playwritevn">A quick brown fox jumps over the lazy dog</span>
+                    </button>
                 </div>
+            </div>
 
-                <!-- PICK PICTURES -->
-                <div class="form-group">
-                    <label for="imageUpload">🖼️ Tải ảnh lên:</label>
-                    <input type="file" id="imageUpload" accept="image/*">
-                    <p class="file-hint">Chỉ chấp nhận file hình ảnh (JPG, PNG, GIF)</p>
-                </div>
-
-                <!-- SELECT HANDWRITING -->
-                <div class="form-group">
-                    <label for="fontSelect">✍️ Chọn kiểu chữ:</label>
-                    <select id="fontSelect">
-                        <option value="default">Chữ bình thường</option>
-                        <option value="dancing">Dancing Script</option>
-                        <option value="satisfy">Satisfy (Chữ tay)</option>
-                        <option value="greatvibes">Great Vibes</option>
-                        <option value="caveat">Caveat</option>
-                        <option value="playwritevn">Playwrite VN</option>
-                        <option value="georgia">Georgia (Cổ điển)</option>
-                        <option value="cursive">Cursive (Nghệ thuật)</option>
-                    </select>
-                </div>
-
-                <!-- SEND BUTTON -->
-                <button type="submit" class="send-btn">💌 Gửi Thư</button>
+            <!-- SEND BUTTON -->
+            <form id="letterForm" style="display: none;">
+                <input type="hidden" name="toField">
+                <input type="hidden" name="fromField">
+                <input type="hidden" name="messageField">
+                <input type="hidden" name="selectedFlower">
             </form>
+            <button type="button" class="send-button" id="sendBtn">Send</button>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-popup" style="display:none;">
+                <div class="success-content">✅ Your letter has been sent!</div>
+            </div>
         </div>
 
         <!-- Cột phải: Live Preview -->
         <div class="preview-section">
-            <div class="envelope-container">
-                <!-- Phong bì -->
+            <div class="envelope-wrapper">
+                <div class="flowers-decoration" id="previewFlower">🌸</div>
+                
                 <div class="envelope">
+                    <!-- Letter Inside (White) -->
                     <div class="envelope-front">
-                        <div class="envelope-stamp">📮</div>
-                        <div class="envelope-address">
-                            <p class="address-to">Gửi đến: <span id="previewTo">Người nhận</span></p>
-                            <p class="address-from">Từ: <span id="previewFrom">Người gửi</span></p>
+                        <div class="letter-inside">
+                            <div class="letter-header">
+                                <span class="letter-to">To: <span id="previewTo">You</span></span>
+                            </div>
+                            
+                            <div class="letter-content normal" id="previewMessage">
+                                Your message will appear here as you type...
+                            </div>
+                            
+                            <div class="letter-footer">
+                                <span id="previewFrom">Someone who cares</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Lá thư bên trong -->
-                    <div class="letter">
-                        <div class="letter-top">
-                            <span class="letter-flower" id="previewFlower">🌸</span>
-                        </div>
-                        
-                        <div class="letter-content" id="previewMessage">
-                            Nội dung thư của bạn sẽ xuất hiện tại đây...
-                        </div>
-                        
-                        <div class="letter-signature">
-                            <p id="previewSigner">Chân thành,</p>
-                            <p id="previewSignerName">❤️</p>
-                        </div>
-                        
-                        <div class="letter-image-container">
-                            <img id="previewImage" src="" alt="Ảnh đính kèm" style="display:none;">
-                        </div>
+                    <!-- Envelope Back (Tan) -->
+                    <div class="envelope-back">
+                        <div class="back-address">To:</div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Success Message -->
-            <div id="successMessage" class="success-message" style="display:none;">
-                ✅ Thư của bạn đã được gửi vào hòm thư bí mật!
             </div>
         </div>
     </div>
